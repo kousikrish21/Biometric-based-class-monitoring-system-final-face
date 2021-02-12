@@ -1,0 +1,19 @@
+if {[file exist M2O]} {
+  file delete M2O
+}
+file -force real_in
+after 10
+exec mkdir real_in
+
+exec python input.py
+after 1000
+exec xdg-open main.m  &
+
+while {![file exist M2O]} {
+  puts "loading.." 
+  after 1000
+}
+
+if {[file exist M2O]} {
+  exec python main.py &
+}
